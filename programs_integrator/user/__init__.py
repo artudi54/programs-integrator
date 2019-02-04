@@ -1,0 +1,1 @@
+from programs_integrator.user.ConfigDialog import ConfigDialog
