@@ -10,7 +10,7 @@ class StructureMaker:
 
     def __init__(self, configuration):
         self.configuration = configuration
-        self.programs_path = pathlib.Path(self.configuration.home_path) / StructureMaker.PROGRAMS
+        self.programs_path = pathlib.Path(self.configuration.user.home_path) / StructureMaker.PROGRAMS
         self.programs_autostart_path = self.programs_path / StructureMaker.AUTOSTART
         self.programs_application_dirs_path = self.programs_path / StructureMaker.APPLICATIONS_DIRS
 
@@ -20,7 +20,7 @@ class StructureMaker:
         if not self.programs_path.exists():
             self.programs_path.mkdir(exist_ok=True)
         if not self.programs_autostart_path.exists():
-            os.symlink(str(self.configuration.autostart_path), self.programs_autostart_path)
+            os.symlink(str(self.configuration.user.autostart_path), self.programs_autostart_path)
         if not self.programs_application_dirs_path.exists():
             self.programs_application_dirs_path.mkdir(exist_ok=True)
 

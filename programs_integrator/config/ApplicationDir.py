@@ -2,13 +2,13 @@ import pathlib
 
 
 class ApplicationDir:
-    MAPPING = {
+    _MAPPING = {
         "/usr/share": "SystemApplications",
         "/usr/local/share": "LocalSystemApplications",
         "/var/lib/snapd/desktop": "SnapApplications"
     }
 
-    def __init__(self, path=None):
+    def __init__(self, path: pathlib.Path = None):
         if path is None:
             self.name = None
             self.path = None
@@ -25,8 +25,8 @@ class ApplicationDir:
 
     @staticmethod
     def _make_name(path):
-        if path in ApplicationDir.MAPPING:
-            return ApplicationDir.MAPPING[path]
+        if path in ApplicationDir._MAPPING:
+            return ApplicationDir._MAPPING[path]
         parts = pathlib.Path(path).parts
         name = parts[-1]
         if parts[-1] == 'share':
