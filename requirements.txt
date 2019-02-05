@@ -1,2 +1,2 @@
-sortedcontainers
 pyside2
+sortedcontainers
