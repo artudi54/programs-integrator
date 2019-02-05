@@ -1,5 +1,4 @@
-import inspect
-import pathlib
+import pkg_resources
 import sortedcontainers
 from PySide2 import QtWidgets
 from PySide2 import QtCore
@@ -11,7 +10,7 @@ class ConfigDialog(QtWidgets.QDialog):
 
     def __init__(self, configuration):
         QtWidgets.QDialog.__init__(self)
-        ui_file_path = pathlib.Path(inspect.getfile(SelfUiLoader)).parent / "ConfigDialog.ui"
+        ui_file_path = pkg_resources.resource_filename(__name__, "ConfigDialog.ui")
         SelfUiLoader(self).load(str(ui_file_path))
 
         self.configuration = configuration
