@@ -45,14 +45,16 @@ class ProgramsIntegratorWorker(QtCore.QObject):
         self.config_dialog.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose)
 
         self.config_dialog.destroyed.connect(self._handle_dialog_closed)
-        self.config_dialog.update_requested.connect(self.structure_maker.update())
-        self.config_dialog.accepted.connect(self._handle_config_changed)
+        self.config_dialog.update_requested.connect(self.structure_maker.update)
+        self.config_dialog.config_changed.connect(self._handle_config_changed)
 
         self.config_dialog.show()
 
+    @QtCore.Slot()
     def _handle_dialog_closed(self):
         self.config_dialog = None
 
+    @QtCore.Slot()
     def _handle_config_changed(self):
         self.timer.setInterval(1000 * self.configuration.update_delay)
         self.configuration.write_config()

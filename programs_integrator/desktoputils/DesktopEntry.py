@@ -3,13 +3,23 @@ import configparser
 
 
 class DesktopEntry:
-    def __init__(self, path):
-        self.path = pathlib.Path(path)
+    def __init__(self, path, ):
+        self.path = path
         self.filename = self.path.name
         self.name = DesktopEntry._read_name(self.path)
 
     def is_valid(self):
         return self.name is not None
+
+    def make_filename(self, append_extension=True, use_original_filename=True):
+        if not self.is_valid():
+            return None
+        name = self.name
+        if use_original_filename:
+            name = self.path.stem
+        if append_extension:
+            name += self.path.suffix
+        return name
 
     @staticmethod
     def _read_name(path):
