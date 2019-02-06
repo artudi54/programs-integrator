@@ -9,7 +9,7 @@ class ConfigDialog(QtWidgets.QDialog):
     update_requested = QtCore.Signal()
 
     def __init__(self, configuration):
-        QtWidgets.QDialog.__init__(self)
+        super().__init__()
         ui_file_path = pkg_resources.resource_filename(__name__, "ConfigDialog.ui")
         SelfUiLoader(self).load(str(ui_file_path))
 
