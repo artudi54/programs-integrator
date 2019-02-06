@@ -6,6 +6,7 @@ Program is running as user systemd service. User session with graphical environm
 
 #### programs-integrator-ctl
 It starts graphical tool managing configuration of the program. The configuration is stored in "~/.config/programs-integrator" directory. It let's you change settings, list destkop entries excluded from linking and provides you with information about XDG_DATA_DIRS.
+![screenshot](https://raw.githubusercontent.com/artudi54/programs-integrator/master/Programs%20Integrator%20Configuration.png)
 
 ## Installation
 Application supports only user install. System wide install is disabled, as this app serves as user-only service.
