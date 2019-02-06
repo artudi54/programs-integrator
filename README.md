@@ -9,14 +9,14 @@ It starts graphical tool managing configuration of the program. The configuratio
 ![screenshot](https://raw.githubusercontent.com/artudi54/programs-integrator/master/Programs%20Integrator%20Configuration.png)
 
 ## Installation
-Application supports only user install. System wide install is disabled, as this app serves as user-only service.
+Application supports only user install. System wide installation won't work, as this app serves as user-only service.
 
 #### Installing package
 
 ##### Installing with PIP
 programs-integrator is avalable as a PyPI package. It can be downloaded and installed with PIP
 ```bash
-pip install programs-integrator
+pip install --user programs-integrator
 ```
 
 ##### Manual installation
