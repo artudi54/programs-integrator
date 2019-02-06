@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="programs-integrator",
-    version="0.1.dev0",
+    version="0.1",
     author="Artur Pietrzyk",
     author_email="artudi54@gmail.com",
     description="Daemon program for dynamically generating 'Programs' directory",
@@ -16,5 +16,9 @@ setup(
     data_files=[("share/icons", ["resources/share/icons/programs-integrator.svg"]),
                 ("share/applications", ["resources/share/applications/programs-integrator.desktop"]),
                 ("share/systemd/user", ["resources/share/systemd/user/programs-integrator.service"])],
-    install_requires=open('requirements.txt').read().splitlines()
+    install_requires=open('requirements.txt').read().splitlines(),
+    classifiers=[
+            "Programming Language :: Python :: 3",
+            "License :: OSI Approved :: MIT License",
+            "Operating System :: POSIX :: Linux"],
 )
