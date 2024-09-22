@@ -73,7 +73,8 @@ class Config:
                 except ValueError:
                     pass
 
-        self.excluded_desktop_entries = sortedcontainers.SortedSet(filter(None, open(self.user.excluded_file).read().splitlines()))
+        self.excluded_desktop_entries =\
+            sortedcontainers.SortedSet(filter(None, open(self.user.excluded_file).read().splitlines()))
 
     def write_config(self):
         parser = configparser.ConfigParser()

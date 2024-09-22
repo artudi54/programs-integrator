@@ -27,7 +27,7 @@ class ProgramsIntegratorWorker(QtCore.QObject):
         self.config_dialog = None
 
         self.timer.timeout.connect(self.structure_maker.update)
-        self.timer.setInterval(1000 * 2)
+        self.timer.setInterval(1000 * self.configuration.update_delay)
         self.configuration.write_config()
 
     def start(self):
@@ -54,8 +54,8 @@ class ProgramsIntegratorWorker(QtCore.QObject):
         self.config_dialog = None
 
     def _handle_config_changed(self):
-        #TODO
-        pass
+        self.timer.setInterval(1000 * self.configuration.update_delay)
+        self.configuration.write_config()
 
 
 class ProgramsIntegrator(dbus.service.Object):
@@ -80,9 +80,9 @@ def run():
     try:
         signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-        icon_path = pkg_resources.resource_filename(__name__, "ProgramsIntegrator.png")
         application = QtWidgets.QApplication(sys.argv)
         application.setQuitOnLastWindowClosed(False)
+        icon_path = pkg_resources.resource_filename(__name__, "ProgramsIntegrator.png")
         application.setWindowIcon(QtGui.QIcon(icon_path))
 
         dbus_loop = dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)

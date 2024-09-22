@@ -24,5 +24,5 @@ class DesktopEntry:
                 if key_name in desktop_entry:
                     return desktop_entry[key_name]
             return None
-        except configparser.Error:
+        except (configparser.Error, OSError):
             return None
