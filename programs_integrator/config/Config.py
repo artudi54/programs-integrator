@@ -1,5 +1,6 @@
 import os
 import sys
+import contextlib
 import pathlib
 import configparser
 import sortedcontainers
@@ -63,15 +64,11 @@ class Config:
         if Config._SECTION_CONFIG in parser:
             config_section = parser[Config._SECTION_CONFIG]
             if Config._KEY_APPEND_EXTENSION in config_section:
-                try:
+                with contextlib.suppress(ValueError):
                     self.append_extension = bool(distutils.util.strtobool(config_section[Config._KEY_APPEND_EXTENSION]))
-                except ValueError:
-                    pass
             if Config._KEY_UPDATE_DELAY in config_section:
-                try:
+                with contextlib.suppress(ValueError):
                     self.update_delay = int(config_section[Config._KEY_UPDATE_DELAY])
-                except ValueError:
-                    pass
 
         self.excluded_desktop_entries =\
             sortedcontainers.SortedSet(filter(None, open(self.user.excluded_file).read().splitlines()))
