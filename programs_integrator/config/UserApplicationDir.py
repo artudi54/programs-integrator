@@ -3,7 +3,7 @@ import pathlib
 
 
 class UserApplicationDir(ApplicationDir):
-    def __init__(self, home_path):
+    def __init__(self, home_path: pathlib.Path):
         ApplicationDir.__init__(self)
         self.name = "UserApplications"
-        self.path = pathlib.Path(home_path) / ".local" / "share" / "applications"
+        self.path = home_path / ".local" / "share" / "applications"
