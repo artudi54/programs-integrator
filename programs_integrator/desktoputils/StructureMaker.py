@@ -86,18 +86,20 @@ class StructureMaker:
         for desktop_entry in desktop_entries:
             if desktop_entry.filename in self.configuration.excluded_desktop_entries:
                 continue
-            if desktop_entry.name in entries_dict:
-                symlink_path = entries_dict[desktop_entry.name]
+            filename = desktop_entry.make_filename(self.configuration.append_extension,
+                                                   self.configuration.use_original_filename)
+            if filename in entries_dict:
+                symlink_path = entries_dict[filename]
                 if symlink_path != desktop_entry.path:
                     try:
-                        os.remove(self.programs.path / desktop_entry.name)
-                        os.symlink(desktop_entry.path, self.programs.path / desktop_entry.name)
+                        os.remove(self.programs.path / filename)
+                        os.symlink(desktop_entry.path, self.programs.path / filename)
                     except OSError as exc:
                         print("Warning: " + str(exc), file=sys.stderr)
-                entries_dict.pop(desktop_entry.name)
+                entries_dict.pop(filename)
             else:
                 try:
-                    os.symlink(desktop_entry.path, self.programs.path / desktop_entry.name)
+                    os.symlink(desktop_entry.path, self.programs.path / filename)
                 except OSError as exc:
                     print("Warning: " + str(exc), file=sys.stderr)
 

@@ -3,8 +3,9 @@ import sys
 import contextlib
 import pathlib
 import configparser
-import sortedcontainers
 import distutils.util
+import numpy
+import sortedcontainers
 from programs_integrator.config.ApplicationDir import ApplicationDir
 from programs_integrator.config.UserApplicationDir import UserApplicationDir
 
@@ -12,6 +13,7 @@ from programs_integrator.config.UserApplicationDir import UserApplicationDir
 class Config:
     _SECTION_CONFIG = "Config"
     _KEY_APPEND_EXTENSION = "AppendExtension"
+    _KEY_USE_ORIGINAL_FILENAME = "UseOriginalFilename"
     _KEY_UPDATE_DELAY = "UpdateDelay"
 
     class User:
@@ -27,6 +29,7 @@ class Config:
         self.application_dirs = Config._read_application_dirs(self.user.home_path)
 
         self.append_extension = True
+        self.use_original_filename = True
         self.update_delay = 10
         self.excluded_desktop_entries = set()
 
@@ -66,9 +69,15 @@ class Config:
             if Config._KEY_APPEND_EXTENSION in config_section:
                 with contextlib.suppress(ValueError):
                     self.append_extension = bool(distutils.util.strtobool(config_section[Config._KEY_APPEND_EXTENSION]))
+            if Config._KEY_USE_ORIGINAL_FILENAME in config_section:
+                with contextlib.suppress(ValueError):
+                    self.use_original_filename = bool(distutils.util.strtobool(config_section[Config._KEY_USE_ORIGINAL_FILENAME]))
             if Config._KEY_UPDATE_DELAY in config_section:
                 with contextlib.suppress(ValueError):
-                    self.update_delay = int(config_section[Config._KEY_UPDATE_DELAY])
+                    update_delay = int(config_section[Config._KEY_UPDATE_DELAY])
+                    if update_delay <= 0 or (update_delay * 1000) > numpy.iinfo(numpy.int32).max:
+                        raise ValueError()
+                    self.update_delay = update_delay
 
         self.excluded_desktop_entries =\
             sortedcontainers.SortedSet(filter(None, open(self.user.excluded_file).read().splitlines()))
@@ -78,6 +87,7 @@ class Config:
         parser.optionxform = str
         parser[Config._SECTION_CONFIG] = {
             Config._KEY_APPEND_EXTENSION: str(self.append_extension),
+            Config._KEY_USE_ORIGINAL_FILENAME: str(self.use_original_filename),
             Config._KEY_UPDATE_DELAY: str(self.update_delay)
         }
         with self.user.config_file.open("w") as config_file:
@@ -93,6 +103,7 @@ class Config:
     def print(self, file=sys.stdout):
         print("Config:", file=file)
         print("\t" + Config._KEY_APPEND_EXTENSION + "=" + str(self.append_extension), file=file)
+        print("\t" + Config._KEY_USE_ORIGINAL_FILENAME + "=" + str(self.use_original_filename), file=file)
         print("\t" + Config._KEY_UPDATE_DELAY + "=" + str(self.update_delay), file=file)
         print("\tApplicationDirs:")
         for application_dir in self.application_dirs:

@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Programs Integrator Control
+Name=Programs Integrator Configuration
 Exec="$HOME/.local/bin/programs-integrator-ctl"
 Icon=programs-integrator
 Terminal=false

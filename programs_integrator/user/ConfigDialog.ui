@@ -69,9 +69,16 @@
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="append_extension">
+        <widget class="QCheckBox" name="append_extension_button">
          <property name="text">
           <string>Append &quot;.desktop&quot; extension</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="use_original_filename_button">
+         <property name="text">
+          <string>Use original filename</string>
          </property>
         </widget>
        </item>
@@ -99,6 +106,13 @@
          </property>
          <property name="default">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="apply_button">
+         <property name="text">
+          <string>Apply</string>
          </property>
         </widget>
        </item>
@@ -140,6 +154,9 @@
      </item>
      <item>
       <widget class="QTableWidget" name="application_directories_table">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
        <property name="selectionBehavior">
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
