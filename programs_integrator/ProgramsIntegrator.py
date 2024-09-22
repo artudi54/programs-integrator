@@ -20,7 +20,7 @@ DBUS_OBJECT_NAME = "/ProgramsIntegrator"
 
 class ProgramsIntegratorWorker(QtCore.QObject):
     def __init__(self):
-        QtCore.QObject.__init__(self)
+        super().__init__()
         self.configuration = Config()
         self.structure_maker = StructureMaker(self.configuration)
         self.timer = QtCore.QTimer(self)
