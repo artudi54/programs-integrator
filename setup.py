@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="programs-integrator",
-    version="0.2",
+    version="0.3",
     author="artudi54",
     description="Daemon program for dynamically generating 'Programs' directory",
     long_description=open("README.md").read(),
