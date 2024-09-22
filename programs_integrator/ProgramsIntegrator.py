@@ -1,12 +1,14 @@
 import sys
 import signal
 import pathlib
+import pkg_resources
 import dbus
 import dbus.bus
 import dbus.service
 import dbus.mainloop.glib
 from PySide2 import QtWidgets
 from PySide2 import QtCore
+from PySide2 import QtGui
 from programs_integrator.desktoputils import StructureMaker
 from programs_integrator.config import Config
 from programs_integrator import user
@@ -78,8 +80,10 @@ def run():
     try:
         signal.signal(signal.SIGINT, signal.SIG_DFL)
 
+        icon_path = pkg_resources.resource_filename(__name__, "ProgramsIntegrator.png")
         application = QtWidgets.QApplication(sys.argv)
         application.setQuitOnLastWindowClosed(False)
+        application.setWindowIcon(QtGui.QIcon(icon_path))
 
         dbus_loop = dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 

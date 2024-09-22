@@ -10,7 +10,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/artudi54/programs-integrator",
     packages=find_packages(),
-    package_data={"": ["*.ui"]},
+    package_data={"": ["*.ui", "*.png"]},
     scripts=["bin/programs-integrator", "bin/programs-integrator-ctl"],
     data_files=[("share/icons", ["resources/share/icons/programs-integrator.svg"]),
                 ("share/applications", ["resources/share/applications/programs-integrator.desktop"]),
