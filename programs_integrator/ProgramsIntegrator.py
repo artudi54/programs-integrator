@@ -6,9 +6,9 @@ import dbus
 import dbus.bus
 import dbus.service
 import dbus.mainloop.glib
-from PySide2 import QtWidgets
-from PySide2 import QtCore
-from PySide2 import QtGui
+from PySide6 import QtWidgets
+from PySide6 import QtCore
+from PySide6 import QtGui
 from programs_integrator.desktoputils import StructureMaker
 from programs_integrator.config import Config
 from programs_integrator import user
@@ -49,6 +49,8 @@ class ProgramsIntegratorWorker(QtCore.QObject):
         self.config_dialog.config_changed.connect(self._handle_config_changed)
 
         self.config_dialog.show()
+        self.config_dialog.raise_()
+        self.config_dialog.activateWindow()
 
     @QtCore.Slot()
     def _handle_dialog_closed(self):

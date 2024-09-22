@@ -1,4 +1,4 @@
-from PySide2 import QtUiTools
+from PySide6 import QtUiTools
 
 
 class SelfUiLoader(QtUiTools.QUiLoader):
