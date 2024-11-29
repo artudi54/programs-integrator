@@ -1,4 +1,5 @@
 import os
+import pathlib
 import sys
 from programs_integrator.desktoputils.DesktopEntry import DesktopEntry
 
@@ -130,6 +131,8 @@ class StructureMaker:
                 continue
             for file in files:
                 file_path = application_dir.path / file
+                if file_path.suffix != ".desktop":
+                    continue
                 if file_path in self.configuration.excluded_desktop_entries:
                     continue
                 desktop_entry = DesktopEntry(application_dir.path / file)

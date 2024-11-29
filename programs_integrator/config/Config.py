@@ -45,6 +45,10 @@ class Config:
     def _read_application_dirs(home_path):
         application_dirs = []
 
+        user_application_dir = UserApplicationDir(home_path)
+        if user_application_dir.exists():
+            application_dirs.append(user_application_dir)
+
         xdg_dirs_str = os.environ["XDG_DATA_DIRS"]
         xdg_dirs = xdg_dirs_str.split(":")
 
@@ -52,10 +56,6 @@ class Config:
             application_dir = ApplicationDir(xdg_dir)
             if application_dir.exists():
                 application_dirs.append(application_dir)
-
-        user_application_dir = UserApplicationDir(home_path)
-        if user_application_dir.exists():
-            application_dirs.append(user_application_dir)
 
         return application_dirs
 
