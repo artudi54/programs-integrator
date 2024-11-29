@@ -86,6 +86,7 @@ def run():
 
         application = QtWidgets.QApplication(sys.argv)
         application.setQuitOnLastWindowClosed(False)
+        application.setDesktopFileName("programs-integrator")
         icon_path = pkg_resources.resource_filename(__name__, "ProgramsIntegrator.png")
         application.setWindowIcon(QtGui.QIcon(icon_path))
 
